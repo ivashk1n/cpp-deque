@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QListWidget>
+#include <functional>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -309,11 +310,7 @@ void MainWindow::on_B_max_element_clicked()
 
 void MainWindow::on_B_sort_clicked()
 {
-    auto comp = [](const std::string& a, const std::string& b) {
-        return a < b;
-    };
-
-    deque_model_.items = MergeSort(deque_model_.items, comp);
+    std::sort(deque_model_.items.begin(), deque_model_.items.end());
     deque_model_.iterator = deque_model_.items.begin();
     ApplyModel();
 }
